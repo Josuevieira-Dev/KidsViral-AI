@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101225">
+  <meta name="description" content="KidsViral AI - estúdio de criação de vídeos infantis originais">
+  <title>KidsViral AI — Estúdio infantil</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/"><span class="brand-mark">✦</span><span>KidsViral <b>AI</b><small>ESTÚDIO CRIATIVO INFANTIL</small></span></a>
+      <div id="account-area" class="account-area"></div>
+    </header>
+    <section id="auth-view" class="auth-layout">
+      <div class="hero-copy">
+        <span class="eyebrow">✦ IMAGINAÇÃO QUE VIRA HISTÓRIA</span>
+        <h1>Crie histórias incríveis.<br><em>Dê vida às ideias.</em></h1>
+        <p>Planeje personagens, crie roteiros infantis originais com IA e gere cenas em vídeo para seu canal.</p>
+        <div class="feature-pills"><span>✧ Roteiros com IA</span><span>♡ Conteúdo infantil</span><span>▶ Vídeos com MiniMax</span></div>
+      </div>
+      <div class="panel auth-panel">
+        <div class="tabs"><button class="tab active" data-auth="login">Entrar</button><button class="tab" data-auth="register">Criar conta</button></div>
+        <form id="auth-form">
+          <h2 id="auth-title">Bem-vindo de volta!</h2><p id="auth-subtitle" class="muted">Entre para continuar criando.</p>
+          <label id="name-wrap" class="hidden">Seu nome<input name="name" autocomplete="name" placeholder="Como podemos te chamar?"></label>
+          <label>E-mail<input name="email" type="email" required autocomplete="email" placeholder="voce@email.com"></label>
+          <label>Senha<input name="password" type="password" required minlength="8" autocomplete="current-password" placeholder="Mínimo de 8 caracteres"></label>
+          <button class="primary full" type="submit" id="auth-submit">Entrar no estúdio <span>→</span></button>
+          <p id="auth-error" class="error" role="alert"></p>
+        </form>
+        <p class="tiny">Ao continuar, use a plataforma com responsabilidade e publique conteúdo apropriado para crianças.</p>
+      </div>
+    </section>
+    <section id="app-view" class="hidden">
+      <div class="welcome-row"><div><span class="eyebrow">SEU ESTÚDIO</span><h1>Vamos criar algo <em>mágico?</em></h1><p class="muted">Organize seus projetos e transforme ideias em histórias.</p></div><button id="new-project" class="primary">＋ Novo projeto</button></div>
+      <div class="stats-grid"><article class="stat-card"><span>Projetos</span><strong id="project-count">0</strong><small>Suas histórias</small></article><article class="stat-card"><span>Roteiros</span><strong id="script-count">0</strong><small>Roteiros criados</small></article><article class="stat-card"><span>Gerações</span><strong id="video-count">0</strong><small>Cenas solicitadas</small></article></div>
+      <div class="section-heading"><div><h2>Meus projetos</h2><p class="muted">Suas ideias começam aqui.</p></div></div>
+      <div id="projects" class="project-grid"></div>
+      <div id="empty-state" class="empty-state"><div class="empty-icon">✧</div><h3>Seu próximo sucesso começa com uma ideia</h3><p>Crie seu primeiro projeto e desenvolva uma história infantil original.</p><button class="primary" id="empty-new">Criar meu primeiro projeto</button></div>
+    </section>
+    <div id="project-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="panel modal-panel"><button class="close" id="modal-close" aria-label="Fechar">×</button><span class="eyebrow">NOVO PROJETO</span><h2 id="modal-title">Comece uma nova história</h2>
+        <form id="project-form">
+          <label>Nome do projeto<input name="title" required maxlength="100" placeholder="Ex.: A aventura do pequeno astronauta"></label>
+          <label>Ideia principal<textarea name="concept" rows="3" placeholder="Conte em poucas palavras o que acontece..."></textarea></label>
+          <div class="form-row"><label>Faixa etária<select name="audience"><option>3-5 anos</option><option selected>3-8 anos</option><option>6-10 anos</option></select></label><label>Estilo visual<select name="style"><option>Animação 3D colorida</option><option>2D desenho animado</option><option>Livro ilustrado</option><option>Massinha stop motion</option></select></label></div>
+          <button class="primary full" type="submit">Criar projeto <span>→</span></button><p id="project-error" class="error"></p>
+        </form>
+      </div>
+    </div>
+    <div id="detail-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+      <div class="panel modal-panel detail-panel"><button class="close" id="detail-close" aria-label="Fechar">×</button><span class="eyebrow">PAINEL DO PROJETO</span><h2 id="detail-title"></h2><p id="detail-concept" class="muted"></p>
+        <div class="detail-actions"><button id="generate-script" class="primary">✧ Criar roteiro com IA</button><button id="delete-project" class="danger-button">Excluir projeto</button></div>
+        <div id="script-result" class="script-result"><p class="muted">Seu roteiro aparecerá aqui.</p></div>
+        <div id="video-controls" class="video-controls hidden"><label>Prompt visual da cena<textarea id="video-prompt" rows="3" placeholder="Descreva a cena que deseja animar..."></textarea></label><div class="form-row"><label>Duração<select id="video-duration"><option value="6">6 segundos</option><option value="10">10 segundos</option></select></label></div><button id="generate-video" class="primary">▶ Gerar cena em vídeo</button><p id="video-status" class="muted"></p></div>
+      </div>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <footer>KidsViral AI <span>•</span> Crie com imaginação e responsabilidade.</footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
