@@ -1,0 +1,41 @@
+databases:
+  - name: kidsviral-db
+    databaseName: kidsviral
+    user: kidsviral
+    plan: free
+    region: ohio
+
+services:
+  - type: web
+    name: kidsviral-ai
+    runtime: node
+    plan: free
+    region: ohio
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kidsviral-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: APP_URL
+        value: https://kidsviral-ai.onrender.com
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: MINIMAX_API_KEY
+        sync: false
+      - key: MINIMAX_GROUP_ID
+        sync: false
+      - key: MINIMAX_VIDEO_MODEL
+        value: MiniMax-Hailuo-2.3
+      - key: MINIMAX_API_BASE
+        value: https://api.minimax.io
+      - key: MAX_UPLOAD_MB
+        value: "30"
